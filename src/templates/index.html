@@ -10,58 +10,92 @@
     />
   </head>
   <body>
-    <h1>Create New</h1>
-    <form action="/api/create" method="post" class="form">
-      <div class="form_rows">
-        <label>path</label>
-        <input type="text" name="" id="path" placeholder="slug/path" />
-      </div>
-      <div class="form_rows">
-        <label>UTM Source</label>
-        <input
-          type="text"
-          name="utm_source"
-          id="utm_source"
-          placeholder="The referrer (e.g. google, newsletter)"
-        />
-      </div>
-      <div class="form_rows">
-        <label>UTM Medium</label>
-        <input
-          type="text"
-          name="utm_medium"
-          id="utm_medium"
-          placeholder="Marketing medium (e.g. cpc, banner, email)"
-        />
-      </div>
-      <div class="form_rows">
-        <label>UTM Campaign</label>
-        <input
-          type="text"
-          name="utm_campaign"
-          id="utm_campaign"
-          placeholder="Product, promo code, or slogan (e.g. spring_sale)"
-        />
-      </div>
-      <div class="form_rows">
-        <label>UTM Content</label>
-        <input
-          type="text"
-          name="utm_content"
-          id="utm_content"
-          placeholder="Use to differentiate ads"
-        />
-      </div>
-      <div class="form_rows">
-        <label>UTM Term</label>
-        <input
-          type="text"
-          name="utm_term"
-          id="utm_term"
-          placeholder="Identify the paid keywords"
-        />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+      {% block content %}
+      <h1>Create New</h1>
+      <span class="message-error"></span>
+      <form class="form" id="create_form">
+        <div class="form_rows">
+          <label>Path</label>
+          <input
+            type="text"
+            name="path"
+            id="input_path"
+            placeholder="slug/path"
+          />
+        </div>
+        <div class="form_rows">
+          <label for="country_code">Country Code</label>
+          <select name="country_code" id="input_country_code" required>
+            <option value="ca">ca</option>
+            <option value="fr">fr</option>
+            <option value="jp">jp</option>
+          </select>
+        </div>
+        <div class="form_rows">
+          <label for="utm_source">UTM Source</label>
+          <select name="utm_source" id="input_utm_source">
+            <option value="">The referrer</option>
+            <option value="toutiao">toutiao</option>
+            <option value="twitter">twitter</option>
+            <option value="facebook">facebook</option>
+          </select>
+        </div>
+        <div class="form_rows">
+          <label>UTM Medium</label>
+          <input
+            type="text"
+            name="utm_medium"
+            id="input_utm_medium"
+            placeholder="Marketing medium (e.g. cpc, banner, email)"
+          />
+        </div>
+        <div class="form_rows">
+          <label>UTM Campaign</label>
+          <input
+            type="text"
+            name="utm_campaign"
+            id="input_utm_campaign"
+            placeholder="Product, promo code, or slogan (e.g. spring_sale)"
+          />
+        </div>
+        <div class="form_rows">
+          <label>UTM Content</label>
+          <input
+            type="text"
+            name="utm_content"
+            id="input_utm_content"
+            placeholder="Use to differentiate ads"
+          />
+        </div>
+        <div class="form_rows">
+          <label>UTM Term</label>
+          <input
+            type="text"
+            name="utm_term"
+            id="input_utm_term"
+            placeholder="Identify the paid keywords"
+          />
+        </div>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+      {% endblock %}
+
+      <table id="show_table">
+        <p class="message"></p>
+        <tr>
+          <th>Short Code</th>
+          <th>Country Code</th>
+        </tr>
+        <tr>
+          <td id="short_code"><a target="_blank"></a></td>
+          <td id="country_code"></td>
+        </tr>
+      </table>
+    </div>
   </body>
+  {%block script%}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{url_for('.static',filename='js/script.js')}}"></script>
+  {%endblock%}
 </html>

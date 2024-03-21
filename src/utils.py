@@ -3,14 +3,14 @@ import string
 
 
 def generate_short_code(**factors):
-    slug = build_campaign_URL(
+    slug = build_campaign_params(
         path=factors.get("path"), **{k: v for k, v in factors.items() if k.startswith('utm_')})
     sha256_hash = hashlib.sha256(slug.encode()).hexdigest()[:8]
 
     return base62_encode(int(sha256_hash, 16))
 
 
-def build_campaign_URL(**factors):
+def build_campaign_params(**factors):
     params = [('path', factors.get("path")),
               ('utm_campaign', factors.get("utm_campaign")),
               ('utm_content', factors.get("utm_content")),
@@ -25,9 +25,10 @@ def build_campaign_URL(**factors):
     utm_fields = [f"{key}={value}" for key,
                   value in params if key.startswith('utm_') and value]
 
-    campaign_URL = factors["path"] + "?" + "&".join(utm_fields)
+    campaign_params = factors["path"] + "?" + \
+        "&".join(utm_fields) if len(utm_fields) != 0 else factors["path"]
 
-    return campaign_URL
+    return campaign_params
 
 
 def base62_encode(num):

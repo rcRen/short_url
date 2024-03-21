@@ -1,6 +1,5 @@
 from src.config import db
-import hashlib
-import string
+from src.utils import build_campaign_params
 
 
 class Links(db.Model):
@@ -20,7 +19,7 @@ class Links(db.Model):
         return {
             "id": self.id,
             "short_code": self.short_code,
-            "contry_code": self.country_code,
+            "country_code": self.country_code,
             "path": self.path,
             "utm_source": self.utm_source,
             "utm_campaign": self.utm_campaign,
@@ -28,3 +27,7 @@ class Links(db.Model):
             "utm_content": self.utm_content,
             "utm_term": self.utm_term
         }
+
+    def campaign_params(self):
+        return build_campaign_params(
+            path=self.path, **{k: v for k, v in self.__dict__.items() if k.startswith('utm_')})

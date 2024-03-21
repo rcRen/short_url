@@ -1,10 +1,53 @@
-.form {
-  .form_rows {
-    margin-top: 10px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    gap: 3px;
+.container {
+  margin: auto;
+  width: 50%;
+
+  table {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  th,
+  tr {
+    border-bottom: 1px solid black;
+  }
+
+  .message-error {
+    color: tomato;
+  }
+
+  .message {
+    color: green;
+  }
+  .form {
+    .form_rows {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      gap: 3px;
+    }
+
+    input {
+      height: 30px;
+    }
+
+    select {
+      height: 30px;
+    }
+
+    .btn {
+      margin-top: 10px;
+      padding: 5px;
+      font-size: large;
+      background-color: antiquewhite;
+      border-radius: 7px;
+      border: 1px solid gray;
+    }
+
+    a {
+      text-decoration: underline;
+      color: blue;
+    }
   }
 }
