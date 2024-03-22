@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+# basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = create_app(os.getenv("CONFIG_MODE"))
 
@@ -13,10 +14,6 @@ app = create_app(os.getenv("CONFIG_MODE"))
 def index():
     return render_template('index.html')
 
-
-@app.route("/code")
-def code():
-    return render_template('short_code.html')
 
 
 if __name__ == "__main__":
