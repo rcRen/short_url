@@ -1,18 +1,18 @@
 from flask import Flask
 from flask_cors import CORS
-from src.config import config, db
-from src.views import api
-from src.models.db_connect import connect_to_cassandra
+from src.routes import api
+from src.connection import setup_connection, load_config
 
 
-def create_app(config_mode):
+def create_app():
     app = Flask(__name__)
     CORS(app)
-    app.config.from_object(config[config_mode])
+    Config = load_config()
+    app.config.from_object(Config)
     app.static_folder = 'static'
 
     with app.app_context():
-        app.cassandra_session = connect_to_cassandra(config_mode)
+        app.cassandra_session = setup_connection(Config)
 
     app.register_blueprint(api, url_prefix="/api")
 
